@@ -41,24 +41,24 @@ func main() {
 	}
 
 	defer db.Close()
-	logger.Info("Database connection established", "dsn", dsn)
+	logger.Info("database connection established", "dsn", dsn)
 
 	templateCache, err := newTemplateCache()
 	if err != nil {
 		logger.Error(err.Error())
 		os.Exit(1)
 	}
-	logger.Info("Template cache created")
+	logger.Info("template cache created")
 
 	formDecoder := form.NewDecoder()
 
-	logger.Info("Initialized form decoder")
+	logger.Info("initialized form decoder")
 
 	sessionManager := scs.New()
 	sessionManager.Store = mysqlstore.New(db)
 	sessionManager.Lifetime = 12 * time.Hour
 
-	logger.Info("Initialized session manager")
+	logger.Info("initialized session manager")
 
 	app := &application{
 		logger:         logger,
@@ -68,9 +68,15 @@ func main() {
 		sessionManager: sessionManager,
 	}
 
-	logger.Info("Starting server", "port", *p)
+	srv := &http.Server{
+		Addr:     *p,
+		Handler:  app.routes(),
+		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	}
 
-	err = http.ListenAndServe(*p, app.routes())
+	logger.Info("starting server", "port", *p)
+
+	err = srv.ListenAndServe()
 
 	logger.Error(err.Error())
 	os.Exit(1)
