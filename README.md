@@ -1,8 +1,6 @@
 # Let's Go - Go Web Application
 
-A Go web application built while following Let's Go by Alex Edwards. This project implements a simple, production-ready web app with features like routing, templating, and database integration, serving as a learning exercise in Go web development.
-
-This repository contains my implementation of the web application project from *Let's Go* by Alex Edwards. The book guides readers through building a robust, production-ready web application using Go (Golang), covering key concepts like routing, templating, middleware, and database interactions.
+A Go web application built while studying Let's Go by Alex Edwards. This project implements a simple, production-ready web app with features like routing, templating, and database integration, serving as a learning exercise in Go web development.
 
 ## Project Overview
 
@@ -17,7 +15,7 @@ The goal of this project is to follow along with the book and create a functiona
 ## Prerequisites
 
 - Go (version 1.21 or later recommended)
-- A database (e.g., SQLite, MySQL) if applicable
+- A database (e.g., SQLite, MySQL)
 - Git for version control
 
 ## Setup
